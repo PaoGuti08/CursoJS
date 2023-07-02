@@ -43,9 +43,9 @@ var users = [
     },
 ];
 
-window.addEventListener('load', function(){
+window.addEventListener('load', function () {
 
-    function search(){
+    function search() {
 
         //get hobby
         var hobbyField = document.getElementById('hobby');
@@ -56,13 +56,17 @@ window.addEventListener('load', function(){
         var genderField = document.getElementById('gender');
         var selected = genderField.selectedIndex;
         var gender = genderField.options[selected].value;
-        console.log(gender); 
+        console.log(gender);
 
         var resultsHTML = '';
         var numUsers = users.length;
 
-        for(var i = 0; i < numUsers; i++){
-            resultsHTML +=  '<div class="person-row">\
+        for (var i = 0; i < numUsers; i++) {
+
+            if (gender == 'A' || gender == users[i].gender) {
+
+                if(hobby == '' || hobby == users[i].hobby){
+                    resultsHTML += '<div class="person-row">\
                                 <img src="images/' + users[i].avatar + '">\
                                 <div class="person-info">\
                                     <div>' + users[i].name + '</div>\
@@ -70,11 +74,13 @@ window.addEventListener('load', function(){
                                 </div>\
                                 <button>Add as friend</button>\
                             </div>';
+                }                
+            }
         }
 
         results.innerHTML = resultsHTML;
     }
-    
+
     var results = document.getElementById('results');
     var searchBtn = document.getElementById('searchBtn');
     searchBtn.addEventListener('click', search);
